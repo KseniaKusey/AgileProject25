@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class movements : MonoBehaviour
+public class Movements : MonoBehaviour
 {
 
-    [SerializeField] private float speed = 3f;    
-    [SerializeField] private float jumpForce = 15f;    
+    [SerializeField] private float speed = 3;    
+    [SerializeField] private float jumpForce = 10f;    
     private bool isGrounded = false;
     private Rigidbody2D rb;
 
@@ -15,7 +15,7 @@ public class movements : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Horizontal"))
+         if (Input.GetButton("Horizontal"))
             Run();
         if (Mathf.Abs(rb.velocity.y) < 0.005f && Input.GetButtonDown("Jump"))
             Jump();
@@ -24,13 +24,12 @@ public class movements : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         CheckGround();
-
-        
     }
     
     private void Run()
     { 
-        Vector3 dir = transform.right * Input.GetAxis("Horizontal");
+        Vector3 dir = transform.right * Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        transform.position += dir;
     }
 
     private void Jump()
