@@ -15,12 +15,6 @@ public class Astronaut : Entity
     [SerializeField] private Sprite aliveHeart;
     [SerializeField] private Sprite deadHeart;
 
-    [Header("Shooting Settings")]
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform firePoint;
-    [SerializeField] private float fireRate = 0.5f;
-    private float nextFireTime = 0f;
-
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer render;
@@ -69,8 +63,6 @@ public class Astronaut : Entity
             Run();
         if (isGrounded && Input.GetButtonDown("Jump"))
             Jump();
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
-            Shoot();
         if (health > lives)
             health = lives;
 
@@ -117,24 +109,12 @@ public class Astronaut : Entity
         if (!isGrounded) State = States.jump;
     }
 
-    private void Shoot()
-    {
-        nextFireTime = Time.time + fireRate;
-        ///GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        //Bullet bulletComponent = bullet.GetComponent<Bullet>();
-
-        Vector2 direction = render.flipX ? Vector2.left : Vector2.right;
-        //bulletComponent.SetDirection(direction);
-    }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         if ((other.gameObject.CompareTag("Enemy"))&&(lives <=1))
         {
-            //{
-                GameManager.instance.Lose();
-                GetComponent<Astronaut>().enabled = false;
-            //}
+            GameManager.instance.Lose();
+            GetComponent<Astronaut>().enabled = false;
         }
     }
 

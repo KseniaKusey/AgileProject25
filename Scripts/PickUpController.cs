@@ -6,6 +6,7 @@ using UnityEngine;
 public class PickUpController : MonoBehaviour
 {
     private int score = 0;
+    public int Score => score;
 
     [SerializeField]
     private TMP_Text textMeshPro;
@@ -22,12 +23,14 @@ public class PickUpController : MonoBehaviour
             score++;
             Destroy(collision.gameObject);
             textMeshPro.text = score.ToString();
+            GM.Instance.CountPoints(score);
         }
         else if(collision.gameObject.tag == "Diamonds")
         {
             score += 3;
             Destroy(collision.gameObject);
             textMeshPro.text = score.ToString();
+            GM.Instance.CountPoints(score);
         }
     }
 }

@@ -3,9 +3,11 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     protected int lives;
+    public int Lives => lives;
+    
      void Start()
     {
-       
+
     }
     public virtual void GetDamage(int damage = 1)
     {

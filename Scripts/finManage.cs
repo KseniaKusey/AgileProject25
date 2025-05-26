@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class levelTransition : MonoBehaviour
+public class LevelTransition : MonoBehaviour 
 {
     public void Transition()
-    {
+    {   
         SceneManager.LoadScene(2);
     }
-
 }
